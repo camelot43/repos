@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.sql.DataSource;
+import javax.naming.*;
+
 import java.sql.*;
 
 /**
@@ -18,12 +21,30 @@ import java.sql.*;
 public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	DataSource pool; // Database connection pool
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public QueryServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init() throws ServletException {
+		System.out.println("Init");
+		try {
+			// Create a JNDI Initial context to be able to lookup the DataSource
+			InitialContext ctx = new InitialContext();
+			// Lookup the DataSource, which will be backed by a pool
+			// that the application server provides.
+			pool = (DataSource) ctx.lookup("java:comp/env/jdbc/ebookshop");
+			if (pool == null)
+				throw new ServletException("Unknown DataSource 'jdbc/ebookshop'");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	/**
@@ -50,8 +71,9 @@ public class QueryServlet extends HttpServlet {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			// Step 1: Create a database "Connection" object
-			conn = DriverManager.getConnection("jdbc:sqlite:/opt/sqlite/data/ebookshop.db"); // Check
+	         // Get a connection from the pool
+	         conn = pool.getConnection();
+			
 
 			// Step 2: Create a "Statement" object inside the "Connection"
 			stmt = conn.createStatement();
@@ -69,8 +91,7 @@ public class QueryServlet extends HttpServlet {
 				sqlStr += ", '" + authors[i] + "'"; // Subsequent authors need a
 													// leading commas
 			}
-			sqlStr += ") AND price < " + request.getParameter("price")
-					+ " AND qty > 0 ORDER BY author ASC, title ASC";
+			sqlStr += ") AND price < " + request.getParameter("price") + " AND qty > 0 ORDER BY author ASC, title ASC";
 
 			// Print an HTML page as output of query
 			out.println("<html><head><title>Query Results</title></head><body>");
