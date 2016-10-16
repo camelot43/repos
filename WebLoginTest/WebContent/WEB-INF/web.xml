@@ -25,6 +25,7 @@
 	</security-constraint>
 	<login-config>
 		<auth-method>FORM</auth-method>
+		<realm-name>tomcatRealmTest1</realm-name>
 		<form-login-config>
 			<form-login-page>/login.html</form-login-page>
 			<form-error-page>/login-failed.html</form-error-page>

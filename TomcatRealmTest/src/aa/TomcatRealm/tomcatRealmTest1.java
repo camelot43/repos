@@ -24,10 +24,13 @@ public class tomcatRealmTest1 extends RealmBase {
 		this.username = username;
 		this.password = credentials;
 
+		System.out.println("Entering tomcatRealmTest1.authenticate");
 		/* dummy authentication */
 		if (this.username.equals(this.password)) {
+			System.out.println("tomcatRealmTest1.authenticated");
 			return getPrincipal(username);
 		} else {
+			System.out.println("tomcatRealmTest1.not.authenticated");
 			return null;
 		}
 
@@ -35,6 +38,7 @@ public class tomcatRealmTest1 extends RealmBase {
 
 	@Override
 	protected Principal getPrincipal(String username) {
+		System.out.println("Entering tomcatRealmTest1.getPrincipal");
 		List<String> roles = new ArrayList<String>();
 		roles.add("manager");
 		return new GenericPrincipal(username, password, roles);
@@ -42,11 +46,13 @@ public class tomcatRealmTest1 extends RealmBase {
 
 	@Override
 	protected String getPassword(String string) {
+		System.out.println("Entering tomcatRealmTest1.getPassword");
 		return password;
 	}
 
 	@Override
 	protected String getName() {
+		System.out.println("Entering tomcatRealmTest1.getName");
 		return username;
 	}
 
@@ -54,10 +60,12 @@ public class tomcatRealmTest1 extends RealmBase {
 	private String myVariable;
 
 	public String getMyVariable() {
+		System.out.println("Entering tomcatRealmTest1.getMyVariable");
 		return myVariable;
 	}
 
 	public void setMyVariable(String myVariable) {
+		System.out.println("Entering tomcatRealmTest1.setMyVariable");
 		this.myVariable = myVariable;
 	}
 

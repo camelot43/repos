@@ -1,5 +1,7 @@
 package aa.TomcatRealm;
 
+// http://www.christianschenk.org/blog/setup-your-own-tomcat-security-realm/
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
