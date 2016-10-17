@@ -3,6 +3,7 @@ package aa.TomcatRealm;
 
 
 //http://www.matjazcerkvenik.si/developer/java-tomcat-custom-realm.php
+// http://www.techpaste.com/2013/11/protect-access-resource-memory-realm-tomcat/
 
 
 import java.security.Principal;
@@ -41,6 +42,7 @@ public class tomcatRealmTest1 extends RealmBase {
 		System.out.println("Entering tomcatRealmTest1.getPrincipal");
 		List<String> roles = new ArrayList<String>();
 		roles.add("manager");
+		roles.add("tomcat");
 		return new GenericPrincipal(username, password, roles);
 	}
 
