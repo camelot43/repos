@@ -1,5 +1,7 @@
 package aa.WebLoginTest;
 
+// SSL configuration for tomcat https://www.mkyong.com/tomcat/how-to-configure-tomcat-to-support-ssl-or-https/
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
