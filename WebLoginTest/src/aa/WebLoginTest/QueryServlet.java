@@ -17,7 +17,7 @@ import java.sql.*;
 /**
  * Servlet implementation class QueryServlet
  */
-@WebServlet("/QueryServlet")
+@WebServlet("/protected/QueryServlet")
 public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

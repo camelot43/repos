@@ -15,7 +15,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/protected/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
@@ -28,7 +28,7 @@
 		<realm-name>tomcatRealmTest1</realm-name>
 		<form-login-config>
 			<form-login-page>/login.html</form-login-page>
-			<form-error-page>/login-failed.html</form-error-page>
+			<form-error-page>/protected/login-failed.html</form-error-page>
 		</form-login-config>
 	</login-config>
 
