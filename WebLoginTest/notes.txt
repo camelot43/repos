@@ -1,5 +1,10 @@
 
 
+https://www.tutorialspoint.com/jsp/jsp_security.htm
+
+
+
+
 Tomcat server.xml with the changes needed for using the custom realm and SSL
 
 

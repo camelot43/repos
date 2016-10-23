@@ -44,16 +44,20 @@ public class PrincipalInfo extends HttpServlet {
 		htmlPageStart(out, "Principal Info");
 
 		out.println("<table>");
-		out.println("<tr><td>" + "Principal" + "</td>");
+		out.println("<tr><td>" + "Principal Name" + "</td>");
 
 		final Principal userPrincipal = request.getUserPrincipal();
 		if (userPrincipal == null) {
 			out.println("<td>No Principal, No user authenticated</td></tr>");
 		} else {
 			out.println("<td>" + userPrincipal.getName() + "</td></tr>");
-
 			GenericPrincipal genericPrincipal = (GenericPrincipal) userPrincipal;
+			
+			out.println("<tr><td>" + "Principal Password" + "</td>");
+			out.println("<td>" + genericPrincipal.getPassword() + "</td></tr>");
+			
 			final String[] roles = genericPrincipal.getRoles();
+
 			if (roles != null) {
 				for (int i = 0; i < roles.length; i++) {
 					out.println("<tr><td>" + "Role" + "</td>");
