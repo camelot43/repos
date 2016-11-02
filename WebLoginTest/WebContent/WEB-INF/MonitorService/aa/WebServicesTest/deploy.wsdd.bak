@@ -1,0 +1,46 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from MonitorService WSDL service -->
+
+  <service name="Monitor" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://WebServicesTest.aa"/>
+      <parameter name="wsdlServiceElement" value="MonitorService"/>
+      <parameter name="schemaQualified" value="http://WebServicesTest.aa"/>
+      <parameter name="wsdlServicePort" value="Monitor"/>
+      <parameter name="className" value="aa.WebServicesTest.MonitorSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Monitor"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="divideNumbers" qname="operNS:divideNumbers" xmlns:operNS="http://WebServicesTest.aa" returnQName="retNS:divideNumbersReturn" xmlns:retNS="http://WebServicesTest.aa" returnType="rtns:double" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:dividend" xmlns:pns="http://WebServicesTest.aa" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:divisor" xmlns:pns="http://WebServicesTest.aa" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="DivideNumbersException" qname="fns:fault" xmlns:fns="http://WebServicesTest.aa" class="aa.WebServicesTest.DivideNumbersException" type="tns:DivideNumbersException" xmlns:tns="http://WebServicesTest.aa"/>
+      </operation>
+      <operation name="addNumbers" qname="operNS:addNumbers" xmlns:operNS="http://WebServicesTest.aa" returnQName="retNS:addNumbersReturn" xmlns:retNS="http://WebServicesTest.aa" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:number1" xmlns:pns="http://WebServicesTest.aa" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:number2" xmlns:pns="http://WebServicesTest.aa" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="sayHello" qname="operNS:sayHello" xmlns:operNS="http://WebServicesTest.aa" returnQName="retNS:sayHelloReturn" xmlns:retNS="http://WebServicesTest.aa" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://WebServicesTest.aa" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="divideNumbers sayHello addNumbers"/>
+
+      <typeMapping
+        xmlns:ns="http://WebServicesTest.aa"
+        qname="ns:DivideNumbersException"
+        type="java:aa.WebServicesTest.DivideNumbersException"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
