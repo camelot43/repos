@@ -27,13 +27,20 @@
 
             <nav class="nav primary-nav">
                 <ul>
-                    <li><a href="index.jsp">Home</a></li><!--
-                    --><li><a href="Context">Context</a></li><!--
-                    --><li><a href="queryBooks.jsp">Query Books</a></li>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="Context">Context</a></li>
+                    <li><a href="queryBooks.jsp">Query Books</a></li>
                 </ul>
             </nav>
 
         </header>
+
+        <section class="row-alt">
+            <div class="lead container">
+                <h1>Index</h1>
+                <p>Login or Select from the Menu above</p>
+            </div>
+        </section>
 
 
 
