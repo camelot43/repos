@@ -14,5 +14,10 @@
     <body>
         <h1>E-BOOK SHOP</h1>
         <a href="Context">Context</a>
+        <br />
+	<hr />
+        <a href="queryBooks.jsp">Query Books</a>
+        <br />
+	<hr />
     </body>
 </html>
