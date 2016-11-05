@@ -20,6 +20,8 @@
             Author Name:
             <input type="text" name="author" value="" />
             <br />
+            <input type="date" name="birthday">
+            <br />
             <input type="submit" value="Search" name="SearchButton" />
         </form>
     </body>
