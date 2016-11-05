@@ -47,7 +47,7 @@
 
         <form class="col-1-3" action="queryBooks" method="post">
 
-            <fieldset class="register-group">
+            <fieldset class="query-group">
 
                 <label>
                     Book Name:
