@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index.jsp
-    Created on : Nov 3, 2016, 11:17:14 PM
+    Document   : bookResults
+    Created on : Nov 5, 2016, 11:47:43 PM
     Author     : aanciaes
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>eBookShop</title>
+        <title>BookResults</title>
         <link rel="stylesheet" href="stylesheets/main.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
     </head>
@@ -37,12 +37,27 @@
 
         </header>
 
-        <section class="row-alt">
-            <div class="lead container">
-                <h1>Index</h1>
-                <p>Login or Select from the Menu above</p>
-            </div>
-        </section>
+        <table border="600" cellspacing="20" cellpadding="40">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>aaaaaaa</td>
+                    <td>bbbbbbbbbb</td>
+                    <td>ccccccccccccccccc</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
 
 
 

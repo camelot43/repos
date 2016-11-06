@@ -45,9 +45,10 @@
 
 
 
-        <form class="col-1-3" action="queryBooks" method="post">
-
+<!--        <form class="col-1-3" action="queryBooks" method="post">-->
+        <form class="col-1-3" action="controllerExample" method="post">
             <fieldset class="query-group">
+                <input type="hidden" name="todo" value="queryBook" />
 
                 <label>
                     Book Name:
