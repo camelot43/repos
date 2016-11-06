@@ -5,8 +5,8 @@
  */
 package aa.eBookShop.servlets;
 
+import aa.eBookShop.Services.Books;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -49,7 +49,10 @@ public class controllerExample extends HttpServlet {
             // Back to order.jsp for more order
             nextPage = "/queryBooks.jsp";
         } else if (todo.equals("queryBook")) {
-            // Back to order.jsp for more order
+            
+            Books books = new Books();
+            books.query(request.getParameter("book"), request.getParameter("author"));
+            books.dumpResults();
             nextPage = "/bookResults.jsp";
         } 
 
