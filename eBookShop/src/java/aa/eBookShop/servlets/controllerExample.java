@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author aanciaes
@@ -23,6 +25,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "controllerExample", urlPatterns = {"/controllerExample"})
 public class controllerExample extends HttpServlet {
 
+    
+    static final Logger LOGGER = Logger.getLogger(controllerExample.class);
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

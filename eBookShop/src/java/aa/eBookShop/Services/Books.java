@@ -17,19 +17,25 @@ import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
 
+
+import org.apache.log4j.Logger;
+
+
 /**
  *
  * @author aanciaes
  */
 public class Books {
 
+    static final Logger LOGGER = Logger.getLogger(Books.class);
+    
     DataSource pool; // Database connection pool
     
     List results = new ArrayList();
     
     public Books()  {
 
-        System.out.println("Init");
+        LOGGER.info("Books Constructor: init pool");
         try {
             // Create a JNDI Initial context to be able to lookup the DataSource
             InitialContext ctx = new InitialContext();
@@ -69,7 +75,8 @@ public class Books {
 
             sqlStr += " ORDER BY author ASC, title ASC";
 
-            System.out.println(sqlStr);
+            LOGGER.info(sqlStr);
+
 
             ResultSet rset = stmt.executeQuery(sqlStr); // Send the query to the
             
@@ -107,10 +114,10 @@ public class Books {
         public void dumpResults() {
             int i=0;
             
-            System.out.println("Number of elements:" + results.size());
+            LOGGER.info("Number of elements:" + results.size());
             while ( i < results.size()) {
                 book b = (book) results.get(i);
-                System.out.println(i + 
+                LOGGER.info(i + 
                         ":" + b.getId() +
                         "|" + b.getTitle() +
                         "|" + b.getAuthor() +
