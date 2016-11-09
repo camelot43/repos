@@ -17,9 +17,7 @@ import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
 
-
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -28,12 +26,12 @@ import org.apache.log4j.Logger;
 public class Books {
 
     static final Logger LOGGER = Logger.getLogger(Books.class);
-    
+
     DataSource pool; // Database connection pool
-    
-    List results = new ArrayList();
-    
-    public Books()  {
+
+    List<book> results = new ArrayList();
+
+    public Books() {
 
         LOGGER.info("Books Constructor: init pool");
         try {
@@ -77,19 +75,16 @@ public class Books {
 
             LOGGER.info(sqlStr);
 
-
             ResultSet rset = stmt.executeQuery(sqlStr); // Send the query to the
-            
+
             // Step 4: Process the query result
-            
-            
             while (rset.next()) {
                 book b = new book(
-                                    rset.getInt("id"),
-                                    rset.getString("title"),
-                                    rset.getString("author"),
-                                    rset.getDouble("price"),
-                                    rset.getInt("qty"));
+                        rset.getInt("id"),
+                        rset.getString("title"),
+                        rset.getString("author"),
+                        rset.getDouble("price"),
+                        rset.getInt("qty"));
                 results.add(b);
             }
 
@@ -110,22 +105,28 @@ public class Books {
         }
 
     }
- 
-        public void dumpResults() {
-            int i=0;
-            
-            LOGGER.info("Number of elements:" + results.size());
-            while ( i < results.size()) {
-                book b = (book) results.get(i);
-                LOGGER.info(i + 
-                        ":" + b.getId() +
-                        "|" + b.getTitle() +
-                        "|" + b.getAuthor() +
-                        "|" + b.getPrice() +
-                        "|" + b.getQty()
-                        );
-                ++i;
-            }
-        }
+
+
+    public List<book> getResult() {
+        return results;
+    } 
     
+    
+    public void dumpResults() {
+        int i = 0;
+
+        LOGGER.info("Number of elements:" + results.size());
+        while (i < results.size()) {
+            book b = (book) results.get(i);
+            LOGGER.info(i
+                    + ":" + b.getId()
+                    + "|" + b.getTitle()
+                    + "|" + b.getAuthor()
+                    + "|" + b.getPrice()
+                    + "|" + b.getQty()
+            );
+            ++i;
+        }
+    }
+
 }

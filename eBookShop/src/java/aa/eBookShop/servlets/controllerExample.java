@@ -59,6 +59,8 @@ public class controllerExample extends HttpServlet {
             Books books = new Books();
             books.query(request.getParameter("book"), request.getParameter("author"));
             books.dumpResults();
+            
+            request.setAttribute("queryResults", books.getResult());
             nextPage = "/bookResults.jsp";
         } 
 

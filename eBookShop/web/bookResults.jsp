@@ -4,6 +4,8 @@
     Author     : aanciaes
 --%>
 
+<%@page import="aa.eBookShop.Services.book"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +31,7 @@
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="Context">Context</a></li>
-<!--                    <li><a href="queryBooks.jsp">Query Books</a></li>-->
+                    <!--                    <li><a href="queryBooks.jsp">Query Books</a></li>-->
                     <li><a href="controllerExample?todo=startQuery">Query Books</a></li>
                     <li><a href="controllerExample?todo=aa">Controller Example</a></li>
                 </ul>
@@ -37,28 +39,51 @@
 
         </header>
 
-        <table border="600" cellspacing="20" cellpadding="40">
-            <thead>
-                <tr>
-                    <th>Author</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>aaaaaaa</td>
-                    <td>bbbbbbbbbb</td>
-                    <td>ccccccccccccccccc</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
 
+        <section class="row-alt">
+            <div class="lead container">
+
+
+                <%
+                    // Check whether the list of books is empty.
+                    List<book> theBooks = (List<book>) request.getAttribute("queryResults");
+                    if (theBooks != null && theBooks.size() > 0) {
+                %>
+
+                <table border="600" cellspacing="20" cellpadding="40">
+                    <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Title</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <%
+                            // Scriptlet 3: display the books in the shopping cart.
+                            for (int i = 0; i < theBooks.size(); ++i) {
+                                book abook = theBooks.get(i);
+                        %>
+
+                        <tr>
+                            <td><%= abook.getAuthor()%></td>
+                            <td><%= abook.getTitle()%></td>
+                            <td><%= abook.getPrice()%></td>
+                        </tr>
+                        <%
+                            } // for loop
+                        %>
+                    </tbody>
+                </table>
+
+                <%
+                    }  // if
+                %>
+
+
+            </div>
+        </section>
 
 
         <footer class="primary-footer container group">

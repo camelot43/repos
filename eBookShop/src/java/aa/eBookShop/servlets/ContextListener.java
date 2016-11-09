@@ -6,6 +6,9 @@
 
 http://www.codejava.net/coding/how-to-initialize-log4j-for-java-web-application
 
+http://blog.idleworx.com/2010/01/setting-up-log4j-for-simple-java-web.html
+
+
  */
 package aa.eBookShop.servlets;
 
