@@ -32,25 +32,27 @@
                 <div class="lead container">
                     <h1>Login</h1>
                     <p>Enter your userID and Password</p>
+
+                    <form class="col-1-3" action="j_security_check" method="POST">
+
+                        <fieldset class="query-group">
+                            <label>
+                                User ID:
+                                <input type="text" name="j_username" value="" />
+                            </label>
+                            <label>
+                                Password:
+                                <input type="password" name="j_password" value="" />
+                            </label>
+                            <input class="btn" type="submit" value="Go" />
+
+                        </fieldset>
+                    </form>
                 </div>
             </section>
 
 
-            <form class="col-1-3" action="j_security_check" method="POST">
 
-                <fieldset class="query-group">
-                    <label>
-                        User ID:
-                        <input type="text" name="j_username" value="" />
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" name="j_password" value="" />
-                    </label>
-                    <input class="btn" type="submit" value="Go" />
-
-                </fieldset>
-            </form>
 
 
             <footer class="primary-footer container group">
