@@ -28,7 +28,7 @@ public class SQLiteInit {
      */
     public static void main(String[] args) throws ClassNotFoundException {
 
-        databaseFile = "dogperson.db";
+        databaseFile = "sampleCRUD.db";
 
         String jdbcConnStr = "jdbc:sqlite:/opt/sqlite/data/" + databaseFile;
 
