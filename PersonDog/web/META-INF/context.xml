@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/PersonDog">
+        
+    <Resource name="jdbc/persondog" auth="Container" type="javax.sql.DataSource"
+              driverClassName="org.apache.derby.jdbc.ClientDriver"
+              url="jdbc:derby://localhost:1527/aanciaes;create=true"
+              username="aanciaes" password="aanciaes"
+              maxActive="10" maxIdle="3" maxWait="10000" removeAbandoned="true"    />
+</Context>
