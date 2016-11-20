@@ -17,6 +17,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -115,13 +116,28 @@ public class ExampleJPA {
         EntityManager manager = factory.createEntityManager();
 
         List<Task> lista = manager
-                .createQuery("select t from Task as t where t.done = false")
+                .createQuery("select t from Task as t")
                 .getResultList();
-
+        
+        System.out.println("Get all rows");
         for (Task tarefa : lista) {
             System.out.println(tarefa.getDescDesc());
         }
 
+        lista.clear();
+        
+        Query query = manager
+                .createQuery("select t from Task as t where t.done = :paramFinalizado");
+        query.setParameter("paramFinalizado", false);
+
+        lista = query.getResultList();
+        
+        System.out.println("Get rows Done=false");
+        for (Task tarefa : lista) {
+            System.out.println(tarefa.getDescDesc());
+        }
+        
+        
         manager.close();
         factory.close();
     }
