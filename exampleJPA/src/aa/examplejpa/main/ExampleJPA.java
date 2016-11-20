@@ -2,6 +2,12 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
+
+
+https://www.caelum.com.br/apostila-java-web/uma-introducao-pratica-ao-jpa-com-hibernate/#14-12-buscando-com-uma-clausula-where
+
+
  */
 package aa.examplejpa.main;
 
