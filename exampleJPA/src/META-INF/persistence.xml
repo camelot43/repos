@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="tasksPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    
+        <class>aa.examplejpa.model.Task</class>
+    
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/aanciaes;create=true"/>
+            <property name="javax.persistence.jdbc.user" value="aanciaes"/>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="javax.persistence.jdbc.password" value="aanciaes"/>
+      
+      
+            <!--  propriedades do hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+
+            <!--  atualiza o banco, gera as tabelas se for preciso -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+      
+        </properties>
+    </persistence-unit>
+</persistence>
