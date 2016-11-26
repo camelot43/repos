@@ -5,8 +5,12 @@
  */
 package aa.PersonDog.listener;
 
+import aa.PersonDog.dao.HibernateFactory;
+import java.io.File;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import org.apache.log4j.PropertyConfigurator;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,29 +31,31 @@ public class AppContextFactoryListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
-        Configuration configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
-        logger.info("PersonDog Hibernate Configuration created successfully");
-
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        logger.info("PersonDog ServiceRegistry created successfully");
-        SessionFactory sessionFactory = configuration
-                .buildSessionFactory(serviceRegistry);
-        logger.info("PersonDog SessionFactory created successfully");
-
-        sce.getServletContext().setAttribute("SessionFactory", sessionFactory);
+        // Log4j initialization
+        ServletContext context = sce.getServletContext();
+        String log4jConfigFile = context.getInitParameter("log4j-config-location");
+        String fullPath = context.getRealPath("") + File.separator + log4jConfigFile;
+         
+        PropertyConfigurator.configure(fullPath);
+        
+        // Hibernate initialization
+        HibernateFactory hf = new HibernateFactory();
+        SessionFactory sessionFactory = hf.buildIfNeeded();
+        
+        sce.getServletContext().setAttribute("HibernateFactory", hf);
         logger.info("PersonDog Hibernate SessionFactory Configured successfully");
 
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-
-        SessionFactory sessionFactory = (SessionFactory) sce.getServletContext().getAttribute("SessionFactory");
-        if (sessionFactory != null && !sessionFactory.isClosed()) {
-            logger.info("PersonDog Closing sessionFactory");
-            sessionFactory.close();
+        
+        HibernateFactory hf = (HibernateFactory) sce.getServletContext().getAttribute("HibernateFactory");
+        
+        if (hf != null ) {
+            logger.info("PersonDog Closing Hibernate Factory");
+            hf.closeFactory();
         }
-        logger.info("PersonDog Released Hibernate sessionFactory resource");
+        logger.info("Released Hibernate sessionFactory resource");
     }
 }

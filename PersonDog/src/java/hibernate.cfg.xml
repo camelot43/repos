@@ -45,13 +45,28 @@ Contributor(s):
         <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.JDBC</property>
         <property name="hibernate.connection.datasource">java:comp/env/jdbc/persondog</property>
     
+        <!-- Enable Hibernate's automatic session context management -->
         <property name="hibernate.current_session_context_class">thread</property>
         
-        <property name="javax.persistence.schema-generation.database.action">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        
+        <!-- Disable the second-level cache -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> 
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>         
+        
+        
+
+
+
+  
+
        
         <!-- Mapping with model class containing annotations -->
         <mapping class="aa.PersonDog.model.Person"/>
         <mapping class="aa.PersonDog.model.Dog"/>
+        <mapping class="aa.PersonDog.model.UUser"/>
     </session-factory>
 </hibernate-configuration>
 

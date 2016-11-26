@@ -14,8 +14,8 @@ CREATE TABLE Person (
     age int,
     PRIMARY KEY (id));
 
-INSERT INTO person VALUES(1, 'Antonio', 55);
-INSERT INTO person VALUES(2, 'Manuel', 56);
-INSERT INTO person VALUES(3, 'Dias', 57);
-INSERT INTO person VALUES(4, 'Matos', 58);
-INSERT INTO person VALUES(5, 'Anciaes', 59);
+INSERT INTO person (id, name, age) VALUES(1, 'Antonio', 55);
+INSERT INTO person (id, name, age) VALUES(2, 'Manuel', 56);
+INSERT INTO person (id, name, age) VALUES(3, 'Dias', 57);
+INSERT INTO person (id, name, age) VALUES(4, 'Matos', 58);
+INSERT INTO person (id, name, age) VALUES(5, 'Anciaes', 59);
