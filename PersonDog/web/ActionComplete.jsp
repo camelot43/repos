@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Nov 25, 2016, 11:07:17 PM
+    Document   : ActionComplete
+    Created on : Nov 27, 2016, 12:40:35 PM
     Author     : aanciaes
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Person Dog Index Page</title>
+        <title>Action Complete Page</title>
     </head>
     <body>
-        <h1>Person Dog!</h1>
-        <a href="/PersonDog/Controller?todo=insertDefaultData">Insert Default data</a>
+        <h1>Action Complete!</h1>
+        Check Logs for details
     </body>
 </html>

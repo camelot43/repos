@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 
+import aa.PersonDog.services.DefaultData;
+
 
 /**
  *
@@ -50,27 +52,35 @@ public class Controller extends HttpServlet {
         String nextPage = "";
         String todo = request.getParameter("todo");
 
-        if (todo == null) {
+        if (null == todo) {
             // First access - redirect to order.jsp
             nextPage = "/index.jsp";
-        } else if (todo.equals("insertUser")) {
+        } else switch (todo) {
+            case "insertDefaultData":
+                DefaultData df = new DefaultData();
+                df.InsertDefaultUsers(3);
+                df.InsertDefaultPersons(6);
+                df.InsertDefaultDogs(7);
+                df.InsertDefaultPersonsWithDogs(5);
 
-          
-            UUserDAO uDAO = new UUserDAO();
-            
-            UUser usr = new UUser();
-            usr.setId(1000);
-            usr.setName("Antonio");
-            usr.setPassword("antonio pwd");
-            usr.setEmail("antonio@antonio.com");
-            usr.setRole(Role.ADMIN);
-            
-            uDAO.add(usr);
-            
-            nextPage = "/error.jsp";
-        } else if (todo.equals("queryPerson")) {
-
-            nextPage = "/error.jsp";
+                nextPage = "/ActionComplete.jsp";
+                break;
+            case "insertUser":
+                UUserDAO uDAO = new UUserDAO();
+                UUser usr = new UUser();
+                usr.setId(1000);
+                usr.setName("Antonio");
+                usr.setPassword("antonio pwd");
+                usr.setEmail("antonio@antonio.com");
+                usr.setRole(Role.ADMIN);
+                uDAO.add(usr);
+                nextPage = "/error.jsp";
+                break;
+            case "queryPerson":
+                nextPage = "/error.jsp";
+                break;
+            default:
+                break;
         }
 
         ServletContext servletContext = getServletContext();
