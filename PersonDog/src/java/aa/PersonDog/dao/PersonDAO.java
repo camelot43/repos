@@ -38,6 +38,10 @@ public class PersonDAO extends AbstractDao {
         return super.findAll(Person.class);
     }
 
+    public List queryByExample(Person p) throws DataAccessLayerException{
+        return super.queryByExample(p);
+    }
+    
     public Person find(Long id) throws DataAccessLayerException {
         return (Person) super.find(Person.class, id);
     }

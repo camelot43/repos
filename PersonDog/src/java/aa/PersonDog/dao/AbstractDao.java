@@ -91,16 +91,29 @@ public abstract class AbstractDao implements Serializable {
         return obj;
     }
 
-    protected List queryByExample(Class clazz) {
+    protected List queryByExample(Object obj) {
         
         List objects = null;
  
         try {
             startOperation();
 
-            Example ex = Example.create(clazz);
-            // Criteria criteria = session.createCriteria(clazz.class).add(ex);
-            //objects = criteria.list();
+/*Example example = Example.create(cat)
+    .excludeZeroes()           //exclude zero valued properties
+    .excludeProperty("color")  //exclude the property named "color"
+    .ignoreCase()              //perform case insensitive string comparisons
+    .enableLike();             //use like for string comparisons
+List results = session.createCriteria(Cat.class)
+    .add(example)
+    .list();            
+ */           
+            
+            Example ex = Example.create(obj)
+                                .excludeZeroes()           //exclude zero valued properties
+                                .ignoreCase()              //perform case insensitive string comparisons
+                                .enableLike();              //use like for string comparisons
+            Criteria criteria = session.createCriteria(obj.getClass()).add(ex);
+            objects = criteria.list();
             
             tx.commit();
         } catch (HibernateException e) {

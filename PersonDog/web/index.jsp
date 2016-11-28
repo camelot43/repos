@@ -14,5 +14,10 @@
     <body>
         <h1>Person Dog!</h1>
         <a href="/PersonDog/Controller?todo=insertDefaultData">Insert Default data</a>
+        <p/>
+        <a href="/PersonDog/Controller?todo=listAllPersons">List all Persons</a>
+        <p/>
+        <a href="/PersonDog/Controller?todo=queryPersonByExample">Query Persons by Example</a>        
+        
     </body>
 </html>

@@ -16,125 +16,76 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "Person.findUserByIdWithDogs", query = "select p from Person p left join fetch p.dogs where p.id = :personId")
-public class Person implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	public static final String FIND_USER_BY_ID_WITH_DOGS = "Person.findUserByIdWithDogs";
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private int age;
-	private String name;
-
-	@ManyToMany
-	private List<Dog> dogs;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Dog> getDogs() {
-		return dogs;
-	}
-
-	public void setDogs(List<Dog> dogs) {
-		this.dogs = dogs;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Person) {
-			Person person = (Person) obj;
-			return person.getId() == id;
-		}
-
-		return false;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-/**
- *
- * Codigo Original
- * 
- * @author aanciaes
-
-@Entity
+@NamedQuery(name = "Person.findPersonByIdWithDogs", query = "select p from Person p left join fetch p.dogs where p.id = :personId")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String FIND_PERSON_BY_ID_WITH_DOGS = "Person.findUserByIdWithDogs";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
+    private int age;
+    private String name;
 
-    public Long getId() {
+    @ManyToMany
+    private List<Dog> dogs;
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Dog> getDogs() {
+        return dogs;
+    }
+
+    public void setDogs(List<Dog> dogs) {
+        this.dogs = dogs;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return id;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
-            return false;
+    public boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            Person person = (Person) obj;
+            return person.getId() == id;
         }
-        Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+
+        return false;
     }
 
-    @Override
     public String toString() {
-        return "aa.PersonDog.model.Person[ id=" + id + " ]";
+        String ret;
+
+        ret = "Person: " + getId() + ","
+                + getName() + ","
+                + getAge();
+        // + "Dogs: "+dogs.size();
+
+        return ret;
     }
-    
 }
- */

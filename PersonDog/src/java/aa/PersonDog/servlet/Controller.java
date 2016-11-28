@@ -5,7 +5,9 @@
  */
 package aa.PersonDog.servlet;
 
+import aa.PersonDog.dao.PersonDAO;
 import aa.PersonDog.dao.UUserDAO;
+import aa.PersonDog.model.Person;
 import aa.PersonDog.model.Role;
 import aa.PersonDog.model.UUser;
 import java.io.IOException;
@@ -22,7 +24,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 
 import aa.PersonDog.services.DefaultData;
-
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -55,32 +58,77 @@ public class Controller extends HttpServlet {
         if (null == todo) {
             // First access - redirect to order.jsp
             nextPage = "/index.jsp";
-        } else switch (todo) {
-            case "insertDefaultData":
-                DefaultData df = new DefaultData();
-                df.InsertDefaultUsers(3);
-                df.InsertDefaultPersons(6);
-                df.InsertDefaultDogs(7);
-                df.InsertDefaultPersonsWithDogs(5);
+        } else {
+            switch (todo) {
+                case "insertDefaultData": {
+                    DefaultData df = new DefaultData();
+                    df.InsertDefaultUsers(3);
+                    df.InsertDefaultPersons(6);
+                    df.InsertDefaultDogs(7);
+                    df.InsertDefaultPersonsWithDogs(5);
 
-                nextPage = "/ActionComplete.jsp";
-                break;
-            case "insertUser":
-                UUserDAO uDAO = new UUserDAO();
-                UUser usr = new UUser();
-                usr.setId(1000);
-                usr.setName("Antonio");
-                usr.setPassword("antonio pwd");
-                usr.setEmail("antonio@antonio.com");
-                usr.setRole(Role.ADMIN);
-                uDAO.add(usr);
-                nextPage = "/error.jsp";
-                break;
-            case "queryPerson":
-                nextPage = "/error.jsp";
-                break;
-            default:
-                break;
+                    nextPage = "/ActionComplete.jsp";
+                    break;
+                } 
+                case "insertUser": {
+                    UUserDAO uDAO = new UUserDAO();
+                    UUser usr = new UUser();
+                    usr.setId(1000);
+                    usr.setName("Antonio");
+                    usr.setPassword("antonio pwd");
+                    usr.setEmail("antonio@antonio.com");
+                    usr.setRole(Role.ADMIN);
+                    uDAO.add(usr);
+                    nextPage = "/error.jsp";
+                    break;
+                    
+                }
+                case "listAllPersons": {
+                    PersonDAO pDao = new PersonDAO();
+                    List l = null;
+                    l = pDao.findAll();
+
+                    if (l == null || l.isEmpty()) {
+                        nextPage = "/error.jsp";
+                    } else {
+                        Iterator iter = l.iterator();
+
+                        while (iter.hasNext()) {
+                            Person p = (Person) iter.next();
+                            LOGGER.info(p.toString());
+                        }
+                        nextPage = "/ActionComplete.jsp";
+                    }
+                }
+                case "queryPersonByExample": {
+                    PersonDAO pDao = new PersonDAO();
+                    Person p = new Person();
+                    
+                    p.setName("%ntonio%");
+                    List l = null;
+                    l = pDao.queryByExample(p);
+
+                    if (l == null || l.isEmpty()) {
+                        nextPage = "/error.jsp";
+                    } else {
+                        Iterator iter = l.iterator();
+
+                        while (iter.hasNext()) {
+                            Person pp = (Person) iter.next();
+                            LOGGER.info(pp.toString());
+                        }
+                        nextPage = "/ActionComplete.jsp";
+                    }
+                }
+
+                    
+                    break;
+                case "queryPerson":
+                    nextPage = "/error.jsp";
+                    break;
+                default:
+                    break;
+            }
         }
 
         ServletContext servletContext = getServletContext();
