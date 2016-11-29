@@ -98,15 +98,8 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
 
-/*Example example = Example.create(cat)
-    .excludeZeroes()           //exclude zero valued properties
-    .excludeProperty("color")  //exclude the property named "color"
-    .ignoreCase()              //perform case insensitive string comparisons
-    .enableLike();             //use like for string comparisons
-List results = session.createCriteria(Cat.class)
-    .add(example)
-    .list();            
- */           
+       // https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/querycriteria.html  
+       // http://blog.caelum.com.br/simplifique-suas-consultas-com-o-query-by-example-do-hibernate/
             
             Example ex = Example.create(obj)
                                 .excludeZeroes()           //exclude zero valued properties
