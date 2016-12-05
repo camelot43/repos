@@ -69,7 +69,7 @@ public class Controller extends HttpServlet {
 
                     nextPage = "/ActionComplete.jsp";
                     break;
-                } 
+                }
                 case "insertUser": {
                     UUserDAO uDAO = new UUserDAO();
                     UUser usr = new UUser();
@@ -81,7 +81,7 @@ public class Controller extends HttpServlet {
                     uDAO.add(usr);
                     nextPage = "/error.jsp";
                     break;
-                    
+
                 }
                 case "listAllPersons": {
                     PersonDAO pDao = new PersonDAO();
@@ -97,13 +97,17 @@ public class Controller extends HttpServlet {
                             Person p = (Person) iter.next();
                             LOGGER.info(p.toString());
                         }
-                        nextPage = "/ActionComplete.jsp";
+                        nextPage = "/ListPersons.jsp";
                     }
+
+                    request.setAttribute("queryResults", l);
+                    nextPage = "/ListPersons.jsp";
+                    break;
                 }
                 case "queryPersonByExample": {
                     PersonDAO pDao = new PersonDAO();
                     Person p = new Person();
-                    
+
                     p.setName("%ntonio%");
                     List l = null;
                     l = pDao.queryByExample(p);
@@ -119,10 +123,10 @@ public class Controller extends HttpServlet {
                         }
                         nextPage = "/ActionComplete.jsp";
                     }
+                    break;
                 }
 
-                    
-                    break;
+
                 case "queryPerson":
                     nextPage = "/error.jsp";
                     break;
