@@ -17,7 +17,7 @@ Base on: http://www.quackit.com/bootstrap/bootstrap_3
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Person Dog</a>
+            <a class="navbar-brand" href="/PersonDog/index.jsp">Person Dog</a>
         </div>
 
         <!-- COLLAPSIBLE NAVBAR -->
@@ -38,8 +38,8 @@ Base on: http://www.quackit.com/bootstrap/bootstrap_3
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dogs<span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="dogs">
-                        <li><a href="#">List all</a></li>
-                        <li><a href="#">Query by Example</a></li>
+                        <li><a href="/PersonDog/Controller?todo=listAllDogs">List all</a></li>
+                        <li><a href="/PersonDog/QueryDogs.jsp">Query by Example</a></li>
                     </ul>
                 </li>
 

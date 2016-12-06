@@ -42,6 +42,8 @@ public class DogDAO extends AbstractDao {
         return (Dog) super.find(Dog.class, id);
     }
 
-
+    public List queryByExample(Dog d) throws DataAccessLayerException{
+        return super.queryByExample(d);
+    }
     
 }
