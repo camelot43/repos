@@ -19,6 +19,7 @@ import org.hibernate.Query;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 
 public abstract class AbstractDao implements Serializable {
 
@@ -104,7 +105,7 @@ public abstract class AbstractDao implements Serializable {
             Example ex = Example.create(obj)
                                 .excludeZeroes()           //exclude zero valued properties
                                 .ignoreCase()              //perform case insensitive string comparisons
-                                .enableLike();              //use like for string comparisons
+                                .enableLike(MatchMode.ANYWHERE);              //use like for string comparisons
             Criteria criteria = session.createCriteria(obj.getClass()).add(ex);
             objects = criteria.list();
             

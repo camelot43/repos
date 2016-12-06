@@ -108,7 +108,17 @@ public class Controller extends HttpServlet {
                     PersonDAO pDao = new PersonDAO();
                     Person p = new Person();
 
-                    p.setName("%ntonio%");
+                    
+                    String n = request.getParameter("person_name");
+                    String a = request.getParameter("person_age");
+                    
+                    int ag = 0;
+                    if ( a!= null && !a.isEmpty())
+                        ag = Integer.parseInt(a);
+                    
+                    p.setName(n);
+                    p.setAge(ag);
+      
                     List l = null;
                     l = pDao.queryByExample(p);
 
@@ -121,11 +131,12 @@ public class Controller extends HttpServlet {
                             Person pp = (Person) iter.next();
                             LOGGER.info(pp.toString());
                         }
-                        nextPage = "/ActionComplete.jsp";
+                        
+                        request.setAttribute("queryResults", l);
+                        nextPage = "/ListPersons.jsp";
                     }
                     break;
                 }
-
 
                 case "queryPerson":
                     nextPage = "/error.jsp";

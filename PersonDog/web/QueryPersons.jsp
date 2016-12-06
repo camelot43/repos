@@ -41,7 +41,8 @@ Base on: http://www.quackit.com/bootstrap/bootstrap_3
 
         <div class="container-fluid">
 
-            <form action="/html/tags/html_form_tag_action.cfm">
+            <form action="/PersonDog/Controller">
+                <input type="hidden" name="todo" value="queryPersonByExample" />
                 <div class="form-group">
                     <label for="person_name">Person Name</label>
                     <input type="text" class="form-control" id="person_name" name="person_name">
