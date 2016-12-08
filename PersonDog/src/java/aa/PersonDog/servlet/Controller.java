@@ -131,6 +131,7 @@ public class Controller extends HttpServlet {
 
                         while (iter.hasNext()) {
                             Person pp = (Person) iter.next();
+                            pDao.loadAllDogs(pp);
                             LOGGER.info(pp.toString());
                         }
 

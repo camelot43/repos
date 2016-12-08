@@ -6,9 +6,11 @@
 package aa.PersonDog.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +30,10 @@ public class Person implements Serializable {
     private int age;
     private String name;
 
+    //https://howtoprogramwithjava.com/hibernate-eager-vs-lazy-fetch-type/
+    //@ManyToMany(fetch=FetchType.EAGER)
     @ManyToMany
-    private List<Dog> dogs;
+    private List<Dog> dogs = new ArrayList<Dog>();
 
     public int getId() {
         return id;
@@ -84,7 +88,11 @@ public class Person implements Serializable {
         ret = "Person: " + getId() + ","
                 + getName() + ","
                 + getAge();
-        // + "Dogs: "+dogs.size();
+        
+        if (dogs == null || dogs.isEmpty())
+            ret += ", Dogs: 0";
+        else
+            ret += ", Dogs: " + dogs.size();
 
         return ret;
     }

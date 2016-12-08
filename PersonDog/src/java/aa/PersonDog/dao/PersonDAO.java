@@ -6,7 +6,13 @@
 package aa.PersonDog.dao;
 
 import aa.PersonDog.model.Person;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -44,6 +50,31 @@ public class PersonDAO extends AbstractDao {
     
     public Person find(Long id) throws DataAccessLayerException {
         return (Person) super.find(Person.class, id);
+    }
+
+    public Person findPersonWithAllDogs(int personId) {
+
+        Session session = HibernateFactory.openSession();
+
+        Person p = (Person) session.createCriteria(Person.class).add(Restrictions.idEq(personId)).uniqueResult();
+        // this will force SQL to execute the query that will join with the user's profile and populate  
+        //  the appropriate information into the user object.  
+        Hibernate.initialize(p.getDogs());  
+  
+        return p;
+    }
+    
+    public Person loadAllDogs(Person p) {
+
+        Session session = HibernateFactory.openSession();
+        //Transaction tx = session.beginTransaction();
+
+        // this will force SQL to execute the query that will join with the user's profile and populate  
+        //  the appropriate information into the user object.  
+        Hibernate.initialize(p.getDogs());  
+  
+        //tx.commit();
+        return p;
     }
 
 

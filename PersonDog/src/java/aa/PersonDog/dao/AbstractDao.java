@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Query;
 
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
@@ -24,8 +25,9 @@ import org.hibernate.criterion.MatchMode;
 public abstract class AbstractDao implements Serializable {
 
     private Session session;
-    private Transaction tx;
+    private Transaction tx = null;
 
+    
     public AbstractDao() {
         HibernateFactory.buildIfNeeded();
     }
@@ -34,7 +36,7 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
             session.save(obj);
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -46,7 +48,7 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
             session.update(obj);
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -58,7 +60,7 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
             session.saveOrUpdate(obj);
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -70,7 +72,7 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
             session.delete(obj);
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -83,7 +85,7 @@ public abstract class AbstractDao implements Serializable {
         try {
             startOperation();
             obj = session.load(clazz, id);
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -109,7 +111,7 @@ public abstract class AbstractDao implements Serializable {
             Criteria criteria = session.createCriteria(obj.getClass()).add(ex);
             objects = criteria.list();
             
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -125,7 +127,7 @@ public abstract class AbstractDao implements Serializable {
             startOperation();
             Query query = session.createQuery("from " + clazz.getName());
             objects = query.list();
-            tx.commit();
+            commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
@@ -134,6 +136,12 @@ public abstract class AbstractDao implements Serializable {
         return objects;
     }
 
+    protected Class findOneResult(String namedQuery, Map<String, Object> parameters) {
+        
+        return null;
+        
+    }
+    
     protected void handleException(HibernateException e) throws DataAccessLayerException {
         HibernateFactory.rollback(tx);
         throw new DataAccessLayerException(e);
@@ -143,4 +151,15 @@ public abstract class AbstractDao implements Serializable {
         session = HibernateFactory.openSession();
         tx = session.beginTransaction();
     }
+    
+    protected void commit() throws HibernateException {
+        if ( tx != null) {
+            tx.commit();
+            tx = null;
+        }
+    }
+    
+    protected void endOperation() throws HibernateException {
+        HibernateFactory.close(session);
+    }    
 }
