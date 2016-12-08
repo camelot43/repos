@@ -33,7 +33,7 @@ public class Person implements Serializable {
     //https://howtoprogramwithjava.com/hibernate-eager-vs-lazy-fetch-type/
     //@ManyToMany(fetch=FetchType.EAGER)
     @ManyToMany
-    private List<Dog> dogs = new ArrayList<Dog>();
+    private List<Dog> dogs = null; //new ArrayList<Dog>();
 
     public int getId() {
         return id;
@@ -88,11 +88,6 @@ public class Person implements Serializable {
         ret = "Person: " + getId() + ","
                 + getName() + ","
                 + getAge();
-        
-        if (dogs == null || dogs.isEmpty())
-            ret += ", Dogs: 0";
-        else
-            ret += ", Dogs: " + dogs.size();
 
         return ret;
     }

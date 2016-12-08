@@ -5,6 +5,8 @@
  */
 package aa.PersonDog.servlet;
 
+import aa.PersonDog.dao.HibernateFactory;
+import aa.PersonDog.dao.PersonDAO;
 import aa.PersonDog.model.Person;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,49 +43,59 @@ public class GetPersonByID extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int empId = Integer.parseInt(request.getParameter("empId"));
-        logger.info("Request Param empId=" + empId);
+        int pId = Integer.parseInt(request.getParameter("personId"));
+        logger.info("Request Param personId=" + pId);
+//
+//        HibernateFactory hibernateFactory = (HibernateFactory) request.getServletContext().getAttribute("HibernateFactory");
+//
+//        Session session = hibernateFactory.openSession();
+//        Transaction tx = session.beginTransaction();
+//        Person p = (Person) session.get(Person.class, pId);
+//        // Hibernate.initialize(p.getDogs()); 
+//        tx.commit();
+//        
+//        
 
-        SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
+        PersonDAO pDao = new PersonDAO();
 
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        Person emp = (Person) session.get(Person.class, empId);
-        tx.commit();
+        Person p = pDao.findPersonWithAllDogs(pId);
+
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
-        if (emp != null) {
+        if (p != null) {
             out.print("<html><body><h2>Employee Details</h2>");
             out.print("<table border=\"1\" cellspacing=10 cellpadding=5>");
             out.print("<th>ID</th>");
             out.print("<th>Name</th>");
             out.print("<th>Age</th>");
+            out.print("<th>Dogs</th>");
 
             out.print("<tr>");
-            out.print("<td>" + empId + "</td>");
-            out.print("<td>" + emp.getName() + "</td>");
-            out.print("<td>" + emp.getAge()+ "</td>");
+            out.print("<td>" + pId + "</td>");
+            out.print("<td>" + p.getName() + "</td>");
+            out.print("<td>" + p.getAge() + "</td>");
+            out.print("<td>" + p.getDogs().size() + "</td>");
             out.print("</tr>");
             out.print("</table></body><br/>");
 
             out.print("</html>");
         } else {
-            out.print("<html><body><h2>No Employee Found with ID=" + empId + "</h2></body></html>");
+            out.print("<html><body><h2>No Person Found with ID=" + pId + "</h2></body></html>");
         }
 
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -96,7 +109,7 @@ public class GetPersonByID extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -107,7 +120,7 @@ public class GetPersonByID extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
