@@ -14,12 +14,12 @@ Base on: http://www.quackit.com/bootstrap/bootstrap_3
         <title>Query Dogs</title>
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="jquery-1.11.3/dist/jquery.min.js"></script>
         <!-- Bootstrap JS -->
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
         <!-- Initialize Bootstrap functionality -->
         <script>
