@@ -82,6 +82,11 @@ Base on: http://www.quackit.com/bootstrap/bootstrap_3
             </table>
             <%
             }  // if
+            else {
+            %>
+            <h1>Query did not retrieve any result</h1>
+            <%
+            }
             %>
 
         </div>

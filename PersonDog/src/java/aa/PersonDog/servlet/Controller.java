@@ -6,10 +6,10 @@
 package aa.PersonDog.servlet;
 
 import aa.PersonDog.dao.DogDAO;
-import aa.PersonDog.dao.PersonDAO;
 import aa.PersonDog.dao.UUserDAO;
+import aa.PersonDog.facade.DogFacade;
+import aa.PersonDog.facade.PersonFacade;
 import aa.PersonDog.model.Dog;
-import aa.PersonDog.model.Person;
 import aa.PersonDog.model.Role;
 import aa.PersonDog.model.UUser;
 import java.io.IOException;
@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 
 import aa.PersonDog.services.DefaultData;
 import java.util.Iterator;
@@ -86,30 +85,19 @@ public class Controller extends HttpServlet {
 
                 }
                 case "listAllPersons": {
-                    PersonDAO pDao = new PersonDAO();
-                    List l = null;
-                    l = pDao.findAll();
+                    PersonFacade personFacade = new PersonFacade();
 
-                    if (l == null || l.isEmpty()) {
+                    List l = personFacade.listAllPersons();
+
+                    if (l == null) {
                         nextPage = "/error.jsp";
                     } else {
-                        Iterator iter = l.iterator();
-
-                        while (iter.hasNext()) {
-                            Person p = (Person) iter.next();
-                            LOGGER.info(p.toString());
-                        }
+                        request.setAttribute("queryResults", l);
                         nextPage = "/ListPersons.jsp";
                     }
-
-                    request.setAttribute("queryResults", l);
-                    nextPage = "/ListPersons.jsp";
                     break;
                 }
                 case "queryPersonByExample": {
-                    PersonDAO pDao = new PersonDAO();
-                    Person p = new Person();
-
                     String n = request.getParameter("person_name");
                     String a = request.getParameter("person_age");
 
@@ -118,22 +106,13 @@ public class Controller extends HttpServlet {
                         ag = Integer.parseInt(a);
                     }
 
-                    p.setName(n);
-                    p.setAge(ag);
+                    PersonFacade personFacade = new PersonFacade();
 
-                    List l = null;
-                    l = pDao.queryByExample(p);
+                    List l = personFacade.queryPersonByExample(n, ag);
 
-                    if (l == null || l.isEmpty()) {
+                    if (l == null) {
                         nextPage = "/error.jsp";
                     } else {
-                        Iterator iter = l.iterator();
-
-                        while (iter.hasNext()) {
-                            Person pp = (Person) iter.next();
-                            LOGGER.info(pp.toString());
-                        }
-
                         request.setAttribute("queryResults", l);
                         nextPage = "/ListPersons.jsp";
                     }
@@ -141,30 +120,19 @@ public class Controller extends HttpServlet {
                 }
 
                 case "listAllDogs": {
-                    DogDAO dDao = new DogDAO();
-                    List l = null;
-                    l = dDao.findAll();
+                    DogFacade dogFacade = new DogFacade();
 
-                    if (l == null || l.isEmpty()) {
+                    List l = dogFacade.listAllDogs();
+
+                    if (l == null) {
                         nextPage = "/error.jsp";
                     } else {
-                        Iterator iter = l.iterator();
-
-                        while (iter.hasNext()) {
-                            Dog d = (Dog) iter.next();
-                            LOGGER.info(d.toString());
-                        }
+                        request.setAttribute("queryResults", l);
                         nextPage = "/ListDogs.jsp";
                     }
-
-                    request.setAttribute("queryResults", l);
-                    nextPage = "/ListDogs.jsp";
                     break;
                 }                
                 case "queryDogsByExample": {
-                    DogDAO dDao = new DogDAO();
-                    Dog d = new Dog();
-
                     String n = request.getParameter("dog_name");
                     String a = request.getParameter("dog_age");
 
@@ -173,22 +141,13 @@ public class Controller extends HttpServlet {
                         ag = Integer.parseInt(a);
                     }
 
-                    d.setName(n);
-                    d.setAge(ag);
+                    DogFacade dogFacade = new DogFacade();
 
-                    List l = null;
-                    l = dDao.queryByExample(d);
+                    List l = dogFacade.queryDogsByExample(n, ag);
 
-                    if (l == null || l.isEmpty()) {
+                    if (l == null) {
                         nextPage = "/error.jsp";
                     } else {
-                        Iterator iter = l.iterator();
-
-                        while (iter.hasNext()) {
-                            Dog dd = (Dog) iter.next();
-                            LOGGER.info(dd.toString());
-                        }
-
                         request.setAttribute("queryResults", l);
                         nextPage = "/ListDogs.jsp";
                     }
