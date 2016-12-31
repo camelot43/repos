@@ -4,7 +4,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>aa.webapp.servlet.hibernate.model.Person</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <prop---erties>
+    <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:/opt/sqlite/data/sampleCRUD.db"/>
       <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>

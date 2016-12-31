@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/PersonDogJPA">
+  <Resource auth="Container" driverClassName="org.apache.derby.jdbc.JDBC" maxActive="10" maxIdle="3" maxWait="10000" name="jdbc/persondog" password="aanciaes" removeAbandoned="true" type="javax.sql.DataSource" url="jdbc:derby://localhost:1527/aanciaes;create=true" username="aanciaes"/>
+  <Resource auth="Container" driverClassName="org.sqlite.JDBC" maxActive="20" maxIdle="10" maxWait="-1" name="jdbc/persondog1" password="" type="javax.sql.DataSource" url="jdbc:sqlite:/opt/sqlite/data/dogperson.db" username=""/>
+</Context>
