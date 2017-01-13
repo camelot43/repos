@@ -11,7 +11,9 @@ package coc.cleanup;
  */
 public class Run {
 
-    public static void main(String[] args) {
+    public static int main(String[] args) {
+        int error = 0;
+
         String filename = null;
         String newFileName = null;
         boolean write = false;
@@ -43,9 +45,14 @@ public class Run {
                 System.exit(0);
                 break;
         }
-        
-        CoCCleanUp clean = new CoCCleanUp(newFileName, write);
-        clean.cleanDocument(filename);
-    }
 
+        CoCCleanUp clean = new CoCCleanUp(newFileName, write);
+       
+        if (clean.cleanDocument(filename) < 0) {
+            System.out.println(clean.getErrorMessage());
+            error = -1;
+        }
+        
+        return error;
+    }
 }
